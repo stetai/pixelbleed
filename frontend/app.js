@@ -1,1 +1,7 @@
-// Only handwritten code allowed.
+/* ##############################################
+ * #####   Only handwritten code allowed.   #####
+ * ########################################### */
+import {
+    Pixel, Corners,
+} from pixel;
+
