@@ -57,7 +57,7 @@ function renderPainter() {
         for (let col=0; col<width; col++) {
             const elPixel = document.createElement("div");
             elPixel.classList.add('pixel-full');
-            elPixel.innerHTML = "S";
+            elPixel.innerHTML = `${col}, ${row}`;
             elPixel.addEventListener("click", handleToggle(col, row));
             
             const elPxSE = document.createElement("div");
@@ -71,6 +71,10 @@ function renderPainter() {
             elPxNW.classList.add('pixel-corner', 'pixel-corner-NW');
             elPxSW.classList.add('pixel-corner', 'pixel-corner-SW');
             elPxCenter.classList.add('pixel-center');
+
+            elPxNE.innerHTML = `${col}, ${row}`;
+            elPxNW.innerHTML = `${col}, ${row}`;
+            elPxSW.innerHTML = `${col}, ${row}`;
 
             elPixel.appendChild(elPxSE);
             elPixel.appendChild(elPxNE);

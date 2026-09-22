@@ -1,3 +1,41 @@
 /*  ##############################################
     #####   Only handwritten code allowed.   #####
     ########################################### */
+
+label {
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.pixel-full {
+    height: 40px;
+    width: 40px;
+    background:lightgray;
+}
+
+.pixel-corner {
+    font-size: 10px;
+    height: 20px;
+    width: 20px;
+    background-color: lightpink;
+}
+
+.pixel-corner-SE {
+    translate: 100% 0;
+    background: rgba(0, 255, 255, 0.5);
+}
+
+.pixel-corner-NE {
+    translate: 100% -200% ;
+    background: rgba(255, 0, 255, 0.5);
+}
+
+.pixel-corner-NW {
+    translate: 0% -300%;
+    background: rgba(255, 255, 0, 0.5);
+}
+
+.pixel-corner-SW {
+    translate: 0% -300%;
+    background: rgba(0, 0, 0, 0.5);
+}
