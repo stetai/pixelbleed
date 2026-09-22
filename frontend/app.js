@@ -25,6 +25,16 @@ async function init() {
 
 // --- svg 
 
+// Check if size has been set
+
 // --- png
+
+// Check if size has been set
+
+// --- pxbld
+
+// Save settings
+
+// Save image
 
 // --- Helpers ------------------------------------------------
