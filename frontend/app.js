@@ -2,22 +2,105 @@
     #####   Only handwritten code allowed.   #####
     ########################################### */
 
-import {
-    Pixel, Corners,
-} from pixel;
+import Pixel from './pixel.js';
 
+// --- State variables ----------------------------------------
+
+let PIXELS = [];
 
 // --- DOM References -----------------------------------------
 
+const $ = id => document.getElementById(id)
+
+const elCanvas          = $("canvas");
+const elCanvasWidth     = $("setting-width");
+const elCanvasHeight    = $("setting-height");
+
 // --- Initialize ---------------------------------------------
 
+document.addEventListener('DOMContentLoaded', init);
+
 async function init() {
+
+    initPixels();
+
     // Initialize interactive elements here
+    renderPainter();
+    // create pixels
+}
+
+function initPixels() {
+    const height = elCanvasHeight.value;
+    const width = elCanvasWidth.value;
+    PIXELS.length = 0;
+    for (let row=0; row<height; row++) {
+        PIXELS.push([]);
+        for (let col=0; col<width; col++) {
+            const pixel = new Pixel([col, row]);
+            PIXELS[row].push(pixel);
+        }
+    }
 }
 
 // --- Settings -----------------------------------------------
 
 // --- Painter ------------------------------------------------
+
+function renderPainter() {
+    const height = elCanvasHeight.value;
+    const width = elCanvasWidth.value;
+
+    for (let row=0; row<height; row++) {
+        const elRow = document.createElement("div");
+        elCanvas.appendChild(elRow);
+
+        for (let col=0; col<width; col++) {
+            const elPixel = document.createElement("div");
+            elPixel.classList.add('pixel-full');
+            elPixel.innerHTML = "S";
+            elPixel.addEventListener("click", handleToggle(col, row));
+            
+            const elPxSE = document.createElement("div");
+            const elPxNE = document.createElement("div");
+            const elPxNW = document.createElement("div");
+            const elPxSW = document.createElement("div");
+            const elPxCenter = document.createElement("div");
+
+            elPxSE.classList.add('pixel-corner', 'pixel-corner-SE');
+            elPxNE.classList.add('pixel-corner', 'pixel-corner-NE');
+            elPxNW.classList.add('pixel-corner', 'pixel-corner-NW');
+            elPxSW.classList.add('pixel-corner', 'pixel-corner-SW');
+            elPxCenter.classList.add('pixel-center');
+
+            elPixel.appendChild(elPxSE);
+            elPixel.appendChild(elPxNE);
+            elPixel.appendChild(elPxNW);
+            elPixel.appendChild(elPxSW);
+            elPixel.appendChild(elPxCenter);
+
+            elRow.appendChild(elPixel);
+        }
+    }
+}
+
+// --- Gridlines
+
+// --- Colour
+
+function refreshPixel(pixel) {
+    const position = pixel.getPosition();
+    // colour pixel corners
+    const corners = pixel.getCorners();
+    for(let i = 0; i<4; i++) {
+        const state = corners[i].getState();
+        // determine full-pixel div
+        // get its corner divs
+        // update colour of corner divs
+    }
+
+    // update colour of pixel center
+
+}
 
 // --- Load document ------------------------------------------
 
@@ -38,3 +121,7 @@ async function init() {
 // Save image
 
 // --- Helpers ------------------------------------------------
+
+function handleToggle(col, row) {
+    PIXELS[row][col].toggleState();
+}

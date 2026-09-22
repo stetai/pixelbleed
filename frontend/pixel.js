@@ -2,11 +2,11 @@
     #####   Only handwritten code allowed.   #####
     ########################################### */
 
-class Pixel {
+export default class Pixel {
 
-    constructor(position, state) {
+    constructor(position) {
         this.position = position;
-        this.state = state;
+        this.state = false;
 
         const cornerSE = new Corner(this, "0");
         const cornerNE = new Corner(this, "1");
