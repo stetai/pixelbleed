@@ -28,8 +28,11 @@ async function init() {
     // Initialize interactive elements here
     renderPainter();
     // create pixels
-
-    const px = document.getElementById("px-0-0");
+    
+    
+    const height = elCanvasHeight.value;
+    const width = elCanvasWidth.value;
+    const px = document.getElementById(`px-${height-1}-${width-1}`);
     px.innerHTML="this";
 }
 
@@ -40,8 +43,8 @@ function initPixels() {
     for (let row=0; row<height; row++) {
         PIXELS.push([]);
         for (let col=0; col<width; col++) {
-            const pixel = new Pixel([col, row]);
-            PIXELS[row].push(pixel);
+            const px = new Pixel([row, col]);
+            PIXELS[row].push(px);
         }
     }
 }
@@ -120,6 +123,7 @@ function refreshPixel(pixel) {
     const row = position[0];
     const col = position[1];
     const elPixel = document.getElementById(`px-${row}-${col}`);
+    console.log(elPixel.innerHTML);
     elPixel.setProperty("background", parseInt(pixel.state));
 }
 

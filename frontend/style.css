@@ -4,16 +4,16 @@
 
 header {
     height: flex;
-
 }
 
-.section-settings {
-    width: clamp(0px, 20vw, 300px);
+main {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.section-settings, .section-saving {
+    width: clamp(100px, 20vw, 300px);
 } 
-
-.section-saving {
-    width: 400px;
-}
 
 .setting h1, .saving h1 {
     font-size: 24px;
@@ -25,8 +25,8 @@ header {
     font-family: 'Courier New', Courier, monospace;
 }
 
-input {
-    width: flex;
+input[type=number]{
+    width: 50;
     min-width: 0;
 }
 
