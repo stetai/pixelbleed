@@ -4,25 +4,60 @@
 
 header {
     height: flex;
+    padding: 10px;
+    padding-left: 20px;
+    border-bottom: 2px solid;
+    border-color: grey;
+    background: rgba(127, 127, 127, 0.2);
+}
+
+.app-title {
+    font-size: 40px;
 }
 
 main {
     display: grid;
     grid-template-columns: auto auto auto;
+
+    background: rgba(127, 127, 127, 0.5);
+}
+
+footer {
+    height: flex;
+    border-top: 2px solid;
+    border-color: grey;
 }
 
 .section-settings, .section-saving {
-    width: clamp(100px, 20vw, 300px);
+    width: clamp(200px, 20vw, 300px);
+    border-right: 2px solid;
+    border-left: 2px solid;
+    border-color: grey;
 } 
 
-.setting h1, .saving h1 {
+.scroll-section {
+    padding: 20px;
+}
+
+.section-title {
     font-size: 24px;
+}
+
+.setting h1, .saving h1 {
+    font-size: 20px;
     font-family: 'Courier New', Courier, monospace;
 }
 
 .setting h2, .saving h2 {
-    font-size: 20px;
+    font-size: 18px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+.setting, .saving {
+    border-left: 5px solid;
+    border-color: black;
+    margin-bottom: 20px;
+    padding: 0px 10px 0px;
 }
 
 input[type=number]{
@@ -30,13 +65,17 @@ input[type=number]{
     min-width: 0;
 }
 
-#canvas {
-    display:grid;
-    grid-template-columns: none;
-    /*padding: 10px;*/
+#saving-width {
+    width: 70;
 }
 
 /* Pixels */
+
+#canvas {
+    display:grid;
+    grid-template-columns: none;
+    padding: 50px;
+}
 
 .pixel-full {
     height: 40px;
@@ -48,7 +87,7 @@ input[type=number]{
     font-size: 10px;
     height: 20px;
     width: 20px;
-    background-color: lightpink;
+    background: lightpink;
 }
 
 .pixel-corner-SE {
