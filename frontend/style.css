@@ -2,10 +2,41 @@
     #####   Only handwritten code allowed.   #####
     ########################################### */
 
-label {
+header {
+    height: flex;
+
+}
+
+.section-settings {
+    width: clamp(0px, 20vw, 300px);
+} 
+
+.section-saving {
+    width: 400px;
+}
+
+.setting h1, .saving h1 {
     font-size: 24px;
     font-family: 'Courier New', Courier, monospace;
 }
+
+.setting h2, .saving h2 {
+    font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+input {
+    width: flex;
+    min-width: 0;
+}
+
+#canvas {
+    display:grid;
+    grid-template-columns: none;
+    /*padding: 10px;*/
+}
+
+/* Pixels */
 
 .pixel-full {
     height: 40px;

@@ -6,7 +6,7 @@ import Pixel from './pixel.js';
 
 // --- State variables ----------------------------------------
 
-let PIXELS = [];
+const PIXELS = [];
 
 // --- DOM References -----------------------------------------
 
@@ -15,6 +15,7 @@ const $ = id => document.getElementById(id)
 const elCanvas          = $("canvas");
 const elCanvasWidth     = $("setting-width");
 const elCanvasHeight    = $("setting-height");
+const elSaveSettings    = $("save-settings");
 
 // --- Initialize ---------------------------------------------
 
@@ -22,17 +23,20 @@ document.addEventListener('DOMContentLoaded', init);
 
 async function init() {
 
-    initPixels();
+    elSaveSettings.addEventListener('click', renderPainter);
 
     // Initialize interactive elements here
     renderPainter();
     // create pixels
+
+    const px = document.getElementById("px-0-0");
+    px.innerHTML="this";
 }
 
 function initPixels() {
+    PIXELS.length = 0;
     const height = elCanvasHeight.value;
     const width = elCanvasWidth.value;
-    PIXELS.length = 0;
     for (let row=0; row<height; row++) {
         PIXELS.push([]);
         for (let col=0; col<width; col++) {
@@ -47,18 +51,26 @@ function initPixels() {
 // --- Painter ------------------------------------------------
 
 function renderPainter() {
+    while (elCanvas.hasChildNodes()) {
+        elCanvas.removeChild(elCanvas.firstChild);
+    }
+
+    initPixels();
+
     const height = elCanvasHeight.value;
     const width = elCanvasWidth.value;
 
+    elCanvas.style.setProperty("grid-template-columns", `repeat(${width}, 40px)`);
+
     for (let row=0; row<height; row++) {
-        const elRow = document.createElement("div");
-        elCanvas.appendChild(elRow);
+        //const elRow = document.createElement("div");
 
         for (let col=0; col<width; col++) {
             const elPixel = document.createElement("div");
             elPixel.classList.add('pixel-full');
-            elPixel.innerHTML = `${col}, ${row}`;
-            elPixel.addEventListener("click", handleToggle(col, row));
+            elPixel.id = `px-${row}-${col}`;
+            elPixel.innerHTML = `${row}, ${col}`;
+            elPixel.addEventListener("click", handleToggle(row, col));
             
             const elPxSE = document.createElement("div");
             const elPxNE = document.createElement("div");
@@ -72,9 +84,9 @@ function renderPainter() {
             elPxSW.classList.add('pixel-corner', 'pixel-corner-SW');
             elPxCenter.classList.add('pixel-center');
 
-            elPxNE.innerHTML = `${col}, ${row}`;
+            /*elPxNE.innerHTML = `${col}, ${row}`;
             elPxNW.innerHTML = `${col}, ${row}`;
-            elPxSW.innerHTML = `${col}, ${row}`;
+            elPxSW.innerHTML = `${col}, ${row}`;*/
 
             elPixel.appendChild(elPxSE);
             elPixel.appendChild(elPxNE);
@@ -82,8 +94,10 @@ function renderPainter() {
             elPixel.appendChild(elPxSW);
             elPixel.appendChild(elPxCenter);
 
-            elRow.appendChild(elPixel);
+            elCanvas.appendChild(elPixel);
         }
+
+        //elCanvas.appendChild(elRow);
     }
 }
 
@@ -103,7 +117,10 @@ function refreshPixel(pixel) {
     }
 
     // update colour of pixel center
-
+    const row = position[0];
+    const col = position[1];
+    const elPixel = document.getElementById(`px-${row}-${col}`);
+    elPixel.setProperty("background", parseInt(pixel.state));
 }
 
 // --- Load document ------------------------------------------
@@ -126,6 +143,8 @@ function refreshPixel(pixel) {
 
 // --- Helpers ------------------------------------------------
 
-function handleToggle(col, row) {
-    PIXELS[row][col].toggleState();
+function handleToggle(row, col) {
+    const px = PIXELS[row][col];
+    px.toggleState();
+    //refreshPixel(px);
 }

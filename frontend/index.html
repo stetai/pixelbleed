@@ -21,9 +21,9 @@
     </header>
 
     <main>
-        <section> <!-- Settings -->
+        <section class="section-settings"> <!-- Settings -->
             <div class="setting">
-                <label>Canvas size</label>
+                <h1>Canvas size</h1>
                 <div>
                     <input type="number" id="setting-width" min="0" value="16" />
                     px × 
@@ -33,7 +33,7 @@
             </div>
 
             <div class="setting">
-                <label>Grid</label>
+                <h1>Grid</h1>
                 <div class="field-row">
                     <input type="checkbox" id="setting-gridlines" />
                     <label for="setting-gridlines">Show gridlines</label>
@@ -41,16 +41,16 @@
             </div>
 
             <div class="setting">
-                <label>Corner style</label>
+                <h1>Corner style</h1>
                 <div class="field-row">
-                    <label for="setting-corner-size">Size</label>
+                    <h2>Size</h2>
                     <div>
                         <input type="number" id="setting-corner-size" min="0" max="50" value="25" />
                         % of the pixel
                     </div>
                 </div>
                 <div class="field-row">
-                    <label for="setting-corner-shape">Shape</label>
+                    <h2>Shape</h2>
                     <select name="setting-corner-shape" id="setting-corner-shape">
                         <option value="circle">Circle</option>
                         <option value="bezel">Bezel</option>
@@ -59,12 +59,12 @@
             </div>
 
             <div class="setting">
-                <label for="setting-colour">Fill colour</label>
+                <h1>Fill colour</h1>
                 <input type="color" id="setting-colour" />
             </div>
 
             <div class="setting">
-                <label>Padding</label>
+                <h1>Padding</h1>
                 <div class="field-row">
                     <label for="padding-top">Top</label>
                     <input type="number" id="padding-top" min="0" value="0" />
@@ -82,17 +82,18 @@
                     <input type="number" id="padding-right" min="0" value="0" />
                 </div>
             </div>
+            <button id="save-settings">Save</button>
         </section>
 
-        <section> <!-- Main content -->
+        <section class="section-canvas"> <!-- Main content -->
             <div id="canvas">
 
             </div>
         </section>
 
-        <section> <!-- Saving --> 
+        <section class="section-saving"> <!-- Saving --> 
             <div class="saving">
-                <label for="saving-width">Size</label>
+                <h1>Size</h1>
                 <div>
                     Render image with width 
                     <input type="number" id="saving-width" />
