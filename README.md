@@ -15,11 +15,11 @@ Custom renderer for pixel art
 
 # Features
 
-Pixelbleed is a pixel art editor that allows merging diagonally adjacent pixels using rounded corners _or other corner styles_\* with control over which pixels are merged and which ones stay disconnecte. You can create pixel art in one colour.
+Pixelbleed is a pixel art editor that allows merging diagonally adjacent pixels using rounded corners _or other corner styles_\* with control over which pixels are merged and which ones stay disconnected. You can adjust the canvas size and create pixel art in one colour.
 
 The pixel art can be rendered as an `.svg` _or a transparent `.png`_\* file _or be saved as a local `.pxbld` file to save the progress to continue in a later session_\*.
 
-\* Features written in _cursive_ will be implemented in the future.
+\* Features written in _cursive_ will be implemented by **v1.0.0**.
 
 # Run in browser
 
