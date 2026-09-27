@@ -12,7 +12,7 @@
 
 ---
 
-<img align="left" src="images/logoPixelbleed02.3.png" alt="Pixelbleed Logo" width="100">
+<img align="left" src="images/logoPixelbleed03.1.png" alt="Pixelbleed Logo" width="100">
 
 Custom renderer for pixel art with pixel rounding and rendering as an output.
 
@@ -36,5 +36,16 @@ then open http://localhost:8080.
 
 # Changelog
 
-- 260926, **v0.0.2-alpha**: Structure layout, create official logo
+- 260926, **v0.0.2-alpha**: Structure layout, create official logos
 - 260921, **v0.0.1-alpha**: Setup html file.
+
+---
+
+
+<div style="text-align:center;">
+⢠⡶⠛⠛⠛⠛⣤  <br>
+⠻⣦⣴⣿⣤⣤⡀  <br>
+⣼⠃⠀⣿⠀⢀⡟  <br>
+⠉⠛⠛⣿⠛⠉⣠  <br>
+⠀⠀⠀⣿⠀⠀⢶  <br>
+</div>
