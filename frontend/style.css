@@ -78,15 +78,15 @@ input[type=number]{
 }
 
 .pixel-full {
-    height: 40px;
-    width: 40px;
+    height: fit-content;
+    width: fit-content;
     background:lightgray;
+    border: 1px solid;
+    border-color: grey;
 }
 
 .pixel-corner {
     font-size: 10px;
-    height: 20px;
-    width: 20px;
     background: lightpink;
 }
 

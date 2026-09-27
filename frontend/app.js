@@ -17,6 +17,8 @@ const elCanvasWidth     = $("setting-width");
 const elCanvasHeight    = $("setting-height");
 const elSaveSettings    = $("save-settings");
 
+const STYLESHEET = document.styleSheets[0];
+
 // --- Initialize ---------------------------------------------
 
 document.addEventListener('DOMContentLoaded', init);
@@ -25,15 +27,16 @@ async function init() {
 
     elSaveSettings.addEventListener('click', renderPainter);
 
+    // Create pixels
+    initPixels();
+
     // Initialize interactive elements here
     renderPainter();
-    // create pixels
-    
-    
-    const height = elCanvasHeight.value;
-    const width = elCanvasWidth.value;
-    const px = document.getElementById(`px-${height-1}-${width-1}`);
-    px.innerHTML="this";
+
+    // Draw pixels
+    PIXELS.forEach(element => {
+        refreshPixel(element);
+    });
 }
 
 function initPixels() {
@@ -54,26 +57,29 @@ function initPixels() {
 // --- Painter ------------------------------------------------
 
 function renderPainter() {
+
+    const pixelSize = '60px';
+
     while (elCanvas.hasChildNodes()) {
         elCanvas.removeChild(elCanvas.firstChild);
     }
 
-    initPixels();
-
     const height = elCanvasHeight.value;
     const width = elCanvasWidth.value;
 
-    elCanvas.style.setProperty("grid-template-columns", `repeat(${width}, 40px)`);
+    elCanvas.style.setProperty("grid-template-columns", `repeat(${width}, ${pixelSize})`);
+    //document.styleSheets[0].insertRule(`.pixel-full {width : ${pixelSize};}`);
+    STYLESHEET.insertRule(`.pixel-corner {width : calc(0.5 * ${pixelSize});}`);
+    STYLESHEET.insertRule(`.pixel-corner {height : calc(0.5 * ${pixelSize});}`);
+
 
     for (let row=0; row<height; row++) {
-        //const elRow = document.createElement("div");
 
         for (let col=0; col<width; col++) {
             const elPixel = document.createElement("div");
             elPixel.classList.add('pixel-full');
             elPixel.id = `px-${row}-${col}`;
-            elPixel.innerHTML = `${row}, ${col}`;
-            elPixel.addEventListener("click", handleToggle(row, col));
+            elPixel.innerHTML = `${row},${col}`;
             
             const elPxSE = document.createElement("div");
             const elPxNE = document.createElement("div");
@@ -87,9 +93,9 @@ function renderPainter() {
             elPxSW.classList.add('pixel-corner', 'pixel-corner-SW');
             elPxCenter.classList.add('pixel-center');
 
-            /*elPxNE.innerHTML = `${col}, ${row}`;
-            elPxNW.innerHTML = `${col}, ${row}`;
-            elPxSW.innerHTML = `${col}, ${row}`;*/
+            //elPxNE.innerHTML = `${col}, ${row}`;
+            //elPxNW.innerHTML = `${col}, ${row}`;
+            //elPxSW.innerHTML = `${col}, ${row}`;
 
             elPixel.appendChild(elPxSE);
             elPixel.appendChild(elPxNE);
@@ -98,9 +104,9 @@ function renderPainter() {
             elPixel.appendChild(elPxCenter);
 
             elCanvas.appendChild(elPixel);
-        }
 
-        //elCanvas.appendChild(elRow);
+            elPixel.addEventListener("click", (e) => {handleToggle(row, col)});
+        }
     }
 }
 
@@ -123,8 +129,11 @@ function refreshPixel(pixel) {
     const row = position[0];
     const col = position[1];
     const elPixel = document.getElementById(`px-${row}-${col}`);
-    console.log(elPixel.innerHTML);
-    elPixel.setProperty("background", parseInt(pixel.state));
+
+    const colourOn = '#AB0808';
+    const colourOff = 'lightblue';
+
+    elPixel.style.setProperty("background", pixel.getState() ? colourOn : colourOff);
 }
 
 // --- Load document ------------------------------------------
@@ -150,5 +159,5 @@ function refreshPixel(pixel) {
 function handleToggle(row, col) {
     const px = PIXELS[row][col];
     px.toggleState();
-    //refreshPixel(px);
+    refreshPixel(px);
 }
