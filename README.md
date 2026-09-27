@@ -36,5 +36,5 @@ then open http://localhost:8080.
 
 # Changelog
 
-- 260926, **v0.0.2-alpha**: 
+- 260926, **v0.0.2-alpha**: Structure layout, create official logo
 - 260921, **v0.0.1-alpha**: Setup html file.
