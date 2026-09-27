@@ -18,6 +18,8 @@ export default class Pixel {
         this.corners = [cornerSE, cornerNE, cornerNW, cornerSW];
     }
 
+    tS() {return `(${this.position[0]}, ${this.position[1]})`;}
+
     getPosition() {return this.position;}
 
     // Position is set at construction.
@@ -35,6 +37,21 @@ export default class Pixel {
     }
 
     toggleState() {this._setState(!this.state);}
+
+    toString() {
+
+        let statesString = "";
+
+        statesString += `"${this.position}": {`;
+        statesString += `"state": ${this.getState()},`;
+        statesString += `"SE": ${this.getCorner(0).getState()},`;
+        statesString += `"NE": ${this.getCorner(1).getState()},`;
+        statesString += `"NW": ${this.getCorner(2).getState()},`;
+        statesString += `"SW": ${this.getCorner(3).getState()},`;
+        statesString += `}`;
+
+        return statesString;
+    }
 }
 
 class Corner {

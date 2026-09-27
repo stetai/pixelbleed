@@ -17,6 +17,8 @@ const elCanvasWidth     = $("setting-width");
 const elCanvasHeight    = $("setting-height");
 const elSaveSettings    = $("save-settings");
 
+const elSaveAsJson      = $("saving-json");
+
 const STYLESHEET = document.styleSheets[0];
 
 // --- Initialize ---------------------------------------------
@@ -27,16 +29,10 @@ async function init() {
 
     elSaveSettings.addEventListener('click', renderPainter);
 
-    // Create pixels
-    initPixels();
+    elSaveAsJson.addEventListener('click', saveJson);
 
     // Initialize interactive elements here
     renderPainter();
-
-    // Draw pixels
-    PIXELS.forEach(element => {
-        refreshPixel(element);
-    });
 }
 
 function initPixels() {
@@ -59,6 +55,9 @@ function initPixels() {
 function renderPainter() {
 
     const pixelSize = '60px';
+
+    // Create pixels
+    initPixels();
 
     while (elCanvas.hasChildNodes()) {
         elCanvas.removeChild(elCanvas.firstChild);
@@ -107,8 +106,10 @@ function renderPainter() {
             elCanvas.appendChild(elPixel);
 
             elPixel.addEventListener("click", (e) => {handleToggle(row, col)});
+
+            refreshPixel(PIXELS[row][col]);
         }
-    }
+    }    
 }
 
 // --- Gridlines
@@ -132,12 +133,20 @@ function refreshPixel(pixel) {
     const elPixel = document.getElementById(`px-${row}-${col}`);
 
     const colourOn = '#AB0808';
-    const colourOff = 'lightblue';
+    const colourOff = 'white';
 
     elPixel.style.setProperty("background", pixel.getState() ? colourOn : colourOff);
 }
 
 // --- Load document ------------------------------------------
+
+function loadDocumentJson(path) {
+    
+}
+
+function assertSizeMatch(size, image) {
+
+}
 
 // --- Save document ------------------------------------------
 
@@ -149,11 +158,38 @@ function refreshPixel(pixel) {
 
 // Check if size has been set
 
-// --- pxbld
+// --- json
+
+function saveJson() {
+    const jsonSettings = toJsonSettings();
+    const jsonImage = toJsonImage();
+
+    const json = JSON.stringify(jsonSettings + jsonImage, null, "  ");
+
+    // save at path
+    console.log(json); // dummy 
+}
 
 // Save settings
 
+function toJsonSettings() {
+    const jsonSettings = "";
+    return jsonSettings;
+}
+
 // Save image
+
+function toJsonImage() {
+    let jsonImage = "{";
+
+    for( const px of PIXELS) {
+        jsonImage += px.toString() + ", ";
+    }
+
+    jsonImage += "}";
+
+    return jsonImage;
+}
 
 // --- Helpers ------------------------------------------------
 
