@@ -12,6 +12,8 @@
 
 ---
 
+<img align="left" src="images/logoPixelbleed02.3.png" alt="Pixelbleed Logo" width="100">
+
 Custom renderer for pixel art with pixel rounding and rendering as an output.
 
 This repo is not so much meant to be a public tool to solve a problem that has plagued the artistic community for centuries. <br>Instead, I will use this project as a way to get better at coding by hand and reading documentations. Everything in this repo must be hand-written and cannot be AI-generated. Code from forums or tutorials must be fully understood before adding them to the repo.
