@@ -110,7 +110,8 @@ input[type=number]{
 
 .pixel-center {
     translate: 0% -200%;
-    border-radius: 50%;/*dummy*/
-    z-index: 10;
+    border-radius: 33%;/*dummy*/
+    z-index: 2;
     background: red;
+    pointer-events: none;
 }

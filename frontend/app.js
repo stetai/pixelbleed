@@ -107,7 +107,10 @@ function renderPainter() {
 
             elCanvas.appendChild(elPixel);
 
-            elPixel.addEventListener("click", (e) => {handleToggle(row, col)});
+            elPxSE.addEventListener("click", (e) => {handleToggle(e, row, col)});
+            elPxNE.addEventListener("click", (e) => {handleToggle(e, row, col)});
+            elPxNW.addEventListener("click", (e) => {handleToggle(e, row, col)});
+            elPxSW.addEventListener("click", (e) => {handleToggle(e, row, col)});
 
             refreshPixel(PIXELS[row][col]);
         }
@@ -137,7 +140,17 @@ function refreshPixel(pixel) {
     const colourOn = '#AB0808';
     const colourOff = 'white';
 
-    elPixel.style.setProperty("background", pixel.getState() ? colourOn : colourOff);
+    const elPxSE = elPixel.children.item(0);
+    const elPxNE = elPixel.children.item(1);
+    const elPxNW = elPixel.children.item(2);
+    const elPxSW = elPixel.children.item(3);
+    const elPxCenter = elPixel.children.item(4);
+
+    elPxSE.style.setProperty("background", pixel.getCorner(0).getState() ? colourOn : colourOff);
+    elPxNE.style.setProperty("background", pixel.getCorner(1).getState() ? colourOn : colourOff);
+    elPxNW.style.setProperty("background", pixel.getCorner(2).getState() ? colourOn : colourOff);
+    elPxSW.style.setProperty("background", pixel.getCorner(3).getState() ? colourOn : colourOff);
+    elPxCenter.style.setProperty("background", pixel.getState() ? colourOn : colourOff);
 }
 
 // --- Load document ------------------------------------------
@@ -195,8 +208,33 @@ function toJsonImage() {
 
 // --- Helpers ------------------------------------------------
 
-function handleToggle(row, col) {
+function handleToggle(e, row, col) {
+
     const px = PIXELS[row][col];
-    px.toggleState();
+    
+    if (e.shiftKey) { // Toggle corners
+
+        const cornerCSSClass = e.currentTarget.classList[1];
+        let orientation = null;
+        switch(cornerCSSClass) {
+            case ('pixel-corner-SE'):
+                orientation = 0;
+                break;
+            case ('pixel-corner-NE'):
+                orientation = 1;
+                break;
+            case ('pixel-corner-NW'):
+                orientation = 2;
+                break;
+            case ('pixel-corner-SW'):
+                orientation = 3;
+                break;
+        }
+
+        px.getCorner(orientation).toggleState();
+    } else { // Toggle center
+        px.toggleState();
+    }
+
     refreshPixel(px);
 }
