@@ -78,11 +78,9 @@ input[type=number]{
 }
 
 .pixel-full {
-    height: fit-content;
-    width: fit-content;
     background:lightgray;
-    border: 1px solid;
-    border-color: grey;
+    /*border: 1px solid;
+    border-color: grey;*/
 }
 
 .pixel-corner {
@@ -91,21 +89,21 @@ input[type=number]{
 }
 
 .pixel-corner-SE {
-    translate: 100% 0;
-    background: rgba(0, 255, 255, 0.5);
+    translate: 100% 100%;
+    background: rgba(0, 255, 255, 0.2);
 }
 
 .pixel-corner-NE {
-    translate: 100% -200% ;
-    background: rgba(255, 0, 255, 0.5);
+    translate: 100% -100% ;
+    background: rgba(255, 0, 255, 0.2);
 }
 
 .pixel-corner-NW {
-    translate: 0% -300%;
-    background: rgba(255, 255, 0, 0.5);
+    translate: 0% -200%;
+    background: rgba(255, 255, 0, 0.2);
 }
 
 .pixel-corner-SW {
-    translate: 0% -300%;
-    background: rgba(0, 0, 0, 0.5);
+    translate: 0% -200%;
+    background: rgba(0, 0, 0, 0.2);
 }

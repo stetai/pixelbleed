@@ -68,7 +68,8 @@ function renderPainter() {
     const width = elCanvasWidth.value;
 
     elCanvas.style.setProperty("grid-template-columns", `repeat(${width}, ${pixelSize})`);
-    //document.styleSheets[0].insertRule(`.pixel-full {width : ${pixelSize};}`);
+    STYLESHEET.insertRule(`.pixel-full {width : ${pixelSize};}`);
+    STYLESHEET.insertRule(`.pixel-full {height : ${pixelSize};}`);
     STYLESHEET.insertRule(`.pixel-corner {width : calc(0.5 * ${pixelSize});}`);
     STYLESHEET.insertRule(`.pixel-corner {height : calc(0.5 * ${pixelSize});}`);
 
@@ -79,7 +80,7 @@ function renderPainter() {
             const elPixel = document.createElement("div");
             elPixel.classList.add('pixel-full');
             elPixel.id = `px-${row}-${col}`;
-            elPixel.innerHTML = `${row},${col}`;
+            //elPixel.innerHTML = `${row},${col}`; // debug
             
             const elPxSE = document.createElement("div");
             const elPxNE = document.createElement("div");
