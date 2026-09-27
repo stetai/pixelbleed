@@ -107,3 +107,10 @@ input[type=number]{
     translate: 0% -200%;
     background: rgba(0, 0, 0, 0.2);
 }
+
+.pixel-center {
+    translate: 0% -200%;
+    border-radius: 50%;/*dummy*/
+    z-index: 10;
+    background: red;
+}

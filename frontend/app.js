@@ -71,6 +71,8 @@ function renderPainter() {
     STYLESHEET.insertRule(`.pixel-full {height : ${pixelSize};}`);
     STYLESHEET.insertRule(`.pixel-corner {width : calc(0.5 * ${pixelSize});}`);
     STYLESHEET.insertRule(`.pixel-corner {height : calc(0.5 * ${pixelSize});}`);
+    STYLESHEET.insertRule(`.pixel-center {width : ${pixelSize};}`);
+    STYLESHEET.insertRule(`.pixel-center {height : ${pixelSize};}`);
 
 
     for (let row=0; row<height; row++) {
