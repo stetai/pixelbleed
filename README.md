@@ -36,7 +36,9 @@ then open http://localhost:8080.
 
 # Changelog
 
-- 260926, **v0.0.2-alpha**: Structure layout, create official logos
+- 260928, **v0.1.0-alpha**: Added default auto-merging behaviour when modifying pixels.
+- 260927, **v0.0.3-alpha**: Made UI worth lookin at. Pixels respond to interaction.
+- 260926, **v0.0.2-alpha**: Structured layout, created official logos.
 - 260921, **v0.0.1-alpha**: Setup html file.
 
 ---
