@@ -96,14 +96,14 @@ class Corner {
         return [stateR, stateM, stateL];
     }
 
-    /*getNeighboursCorners() {
+    getNeighboursCorners() {
         const o = this.getOrientation();
         const cornerR = this.getNeighbours()[0]?.getCorner((o+1)%4);
         const cornerM = this.getNeighbours()[0]?.getCorner((o+1)%4).getNeighbours()[0]?.getCorner((o+2)%4);
         const cornerL = this.getNeighbours()[1]?.getCorner((o+3)%4);
 
         return [cornerR, cornerM, cornerL];
-    }*/
+    }
 
-    toggleState() {this._setState(!this.getState());}
+    toggleState() {this.setState(!this.getState());}
 }

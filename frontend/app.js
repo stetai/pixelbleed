@@ -262,6 +262,14 @@ function handleToggle(e, row, col) {
         px.getCorner(orientation).toggleState();
     } else { // Toggle center
         px.toggleState();
+        for (let o=0;o>4;o++) {
+            const c = px.getCorners()[o];
+            autoMerge(c);
+            const nbc = c.getNeighboursCorners();
+            for (let p=0;p>3;p++) {
+                autoMerge(nbc[p]);
+            }
+        }
     }
 
     refreshPixel(px);
@@ -282,6 +290,7 @@ function autoMerge(corner) {
         corner.setState(true);
     }
 
+    refreshPixel(corner.getPixel());
 }
 
 function runTest() { //DEBUG
@@ -300,7 +309,7 @@ function runTest() { //DEBUG
                     //c.toggleState();
                 }
 
-                if (c.getNeighboursStates()) {
+                if (c.getNeighboursStates()[1]) {
                     c.toggleState();
                 }
             }
