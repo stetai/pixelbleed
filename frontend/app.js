@@ -19,8 +19,8 @@ const elSaveSettings    = $("save-settings");
 
 const elSaveAsJson      = $("saving-json");
 
-const elTester          = $("tester");
-const elTesterResult    = $("tester-result");
+const elTester          = $("tester"); //DEBUG
+const elTesterResult    = $("tester-result"); //DEBUG
 
 const STYLESHEET = document.styleSheets[0];
 
@@ -34,7 +34,7 @@ async function init() {
 
     elSaveAsJson.addEventListener('click', saveJson);
 
-    elTester.addEventListener('click', runTest);
+    elTester.addEventListener('click', runTest); //DEBUG
 
     // Initialize interactive elements here
     renderPainter();
@@ -49,7 +49,6 @@ function initPixels() {
         for (let col=0; col<width; col++) {
             const px = new Pixel([row, col]);
             PIXELS[row].push(px);
-
 
             // Set corner neighbours
             if (row !== 0) {
@@ -224,7 +223,7 @@ function toJsonSettings() {
 function toJsonImage() {
     let jsonImage = "{";
 
-    for( const px of PIXELS) {
+    for( let px of PIXELS) {
         jsonImage += px.toString() + ", ";
     }
 
@@ -268,15 +267,42 @@ function handleToggle(e, row, col) {
     refreshPixel(px);
 }
 
-function runTest() {
-    const px = PIXELS[2][2];
+function runTest() { //DEBUG
+    const px = PIXELS[3][3];
     /*px.getCorner(0).setNeighbours(PIXELS[2][1], PIXELS[1][2]);
     px.getCorner(0).setNeighbours(PIXELS[2][2], null);*/
-    const neighbours = px.getCorner(0).getNeighboursStates();
+    //const neighbours = px.getCorner(2).getNeighboursStates();
+    //const neighbours = c.getNeighbours()[0]?.getCorner((c.getOrientation() + 1) % 4).getNeighbours()[0]?.getState();
+    for (let row=0;row<8;row++) {
+        for(let col=0;col<8;col++) {
+            const pix = PIXELS[row][col];
+            for (let o = 0; o<4; o++) {
+                const c = pix.getCorner(o); 
+                const state = c.getNeighbours()[0]?.getCorner((o+1)%4).getNeighbours()[0]?.getState();
+                if (state) {
+                    //c.toggleState();
+                }
 
-    const result = neighbours ?? "nothing.";
+                if (c.getNeighboursStates()) {
+                    c.toggleState();
+                }
+            }
+        }
+    }
+    /*for (let o = 0; o<4; o++) {
+        const c = px.getCorner(o%4);
+        const dg = c.getNeighbours()[0].getCorner((o+1)%4).getNeighbours()[0];
+        const state = dg.getState();
+        if (state) c.toggleState();
+
+        //if (c.getNeighboursStates()) c.toggleState();
+    }*/
+
+    PIXELS.forEach(e => e.forEach(refreshPixel));
+
+    //const result = neighbours ?? "nothing.";
 
     // Display result
-    elTesterResult.textContent = result;
+    //elTesterResult.textContent = result;
 
 }

@@ -11,10 +11,10 @@ export default class Pixel {
         this.position = position;   // int array [row, col]
         this.state = false;         // bool
 
-        const cornerSE = new Corner(this, "0");
-        const cornerNE = new Corner(this, "1");
-        const cornerNW = new Corner(this, "2");
-        const cornerSW = new Corner(this, "3");
+        const cornerSE = new Corner(this, 0);
+        const cornerNE = new Corner(this, 1);
+        const cornerNW = new Corner(this, 2);
+        const cornerSW = new Corner(this, 3);
         this.corners = [cornerSE, cornerNE, cornerNW, cornerSW];
     }
 
@@ -86,11 +86,14 @@ class Corner {
     }
 
     getNeighboursStates() {
-        const stateR = this.getNeighbours()[0]?.getState();
-        const stateM = this.getNeighbours()[0]?.getCorner((this.getOrientation() + 1) % 4).getNeighbours()[0]?.getState();
-        const stateL = this.getNeighbours()[1]?.getState();
 
-        return [stateR, stateM, stateL];
+        const o = this.getOrientation();
+
+        //const stateR = this.getNeighbours()[0]?.getState();
+        const stateM = this.getNeighbours()[0]?.getCorner((o+1)%4).getNeighbours()[0]?.getState();
+        //const stateL = this.getNeighbours()[1]?.getState();
+
+        return stateM;//[stateR, stateM, stateL];
     }
 
     toggleState() {this._setState(!this.getState());}
