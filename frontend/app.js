@@ -267,6 +267,23 @@ function handleToggle(e, row, col) {
     refreshPixel(px);
 }
 
+function autoMerge(corner) {
+    const nbR = corner.getNeighboursStates()[0];
+    const nbM = corner.getNeighboursStates()[1];
+    const nbL = corner.getNeighboursStates()[2];
+
+    corner.setState(false);
+
+    const isOn = corner.getPixel().getState();
+    if (isOn && (nbR || nbM || nbL)) {
+        corner.setState(true);
+    }
+    if (nbR && nbL) {
+        corner.setState(true);
+    }
+
+}
+
 function runTest() { //DEBUG
     const px = PIXELS[3][3];
     /*px.getCorner(0).setNeighbours(PIXELS[2][1], PIXELS[1][2]);

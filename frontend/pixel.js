@@ -75,7 +75,7 @@ class Corner {
 
     getState() {return this.state;}
 
-    _setState(state) {this.state = state;}
+    setState(state) {this.state = state;}
 
     getNeighbours() {return this.neighbours;}
 
@@ -89,12 +89,21 @@ class Corner {
 
         const o = this.getOrientation();
 
-        //const stateR = this.getNeighbours()[0]?.getState();
+        const stateR = this.getNeighbours()[0]?.getState();
         const stateM = this.getNeighbours()[0]?.getCorner((o+1)%4).getNeighbours()[0]?.getState();
-        //const stateL = this.getNeighbours()[1]?.getState();
+        const stateL = this.getNeighbours()[1]?.getState();
 
-        return stateM;//[stateR, stateM, stateL];
+        return [stateR, stateM, stateL];
     }
+
+    /*getNeighboursCorners() {
+        const o = this.getOrientation();
+        const cornerR = this.getNeighbours()[0]?.getCorner((o+1)%4);
+        const cornerM = this.getNeighbours()[0]?.getCorner((o+1)%4).getNeighbours()[0]?.getCorner((o+2)%4);
+        const cornerL = this.getNeighbours()[1]?.getCorner((o+3)%4);
+
+        return [cornerR, cornerM, cornerL];
+    }*/
 
     toggleState() {this._setState(!this.getState());}
 }
