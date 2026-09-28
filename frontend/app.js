@@ -262,12 +262,12 @@ function handleToggle(e, row, col) {
         px.getCorner(orientation).toggleState();
     } else { // Toggle center
         px.toggleState();
-        for (let o=0;o>4;o++) {
+        for (let o=0;o<4;o++) {
             const c = px.getCorners()[o];
             autoMerge(c);
             const nbc = c.getNeighboursCorners();
-            for (let p=0;p>3;p++) {
-                autoMerge(nbc[p]);
+            for (let p=0;p<3;p++) {
+                if (nbc[p]) autoMerge(nbc[p]);
             }
         }
     }
