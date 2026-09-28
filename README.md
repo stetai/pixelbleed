@@ -1,13 +1,13 @@
 ```plaintext
-   _________________________________________                      ____
-,"                                           ",                ,"      ",
-|         _         ,_ ,_  ,_          ,_     |                |        |
-|    ,__ (_),__, __ | || | | | __  __  | |    |                |        |
-|    | .\| |\  // .)| || .\| |/ .)/ .)/. |    |          ____-"   ____   "-_____________
-|    | ,/\_|/__\\__\\_||__/\_|\__\\__\\__|    |       ,"       ,"      ",                ",
-|    \_|                                      |       |        |        |                 |
-|                                             |       |        |        |                 |
- "-_________________________________________-"        |______-"          "-_______________|
+     _________________________________________   
+  ,"                                           ",
+  |         _         ,_ ,_  ,_          ,_     |
+  |    ,__ (_),__, __ | || | | | __  __  | |    |
+  |    | .\| |\  // .)| || .\| |/ .)/ .)/. |    |
+  |    | ,/\_|/__\\__\\_||__/\_|\__\\__\\__|    |
+  |    \_|                                      |
+  |                                             |
+   "-_________________________________________-" 
 ```
 
 ---
@@ -16,7 +16,11 @@
 
 Custom renderer for pixel art with pixel rounding and rendering as an output.
 
-This repo is not meant to be a public tool to solve a problem that has plagued the artistic community for centuries. <br>Instead, I will use this project as a way to get better at coding by hand and reading documentations. Everything in this repo must be hand-written and cannot be AI-generated. Code from forums or tutorials must be fully understood before adding them to the repo.
+This repo is not meant to be a public tool to solve a problem that has plagued the artistic community for centuries. Instead, I will use this project as a way to get better at coding by hand and reading documentations. 
+
+Everything in this repo must be hand-written and cannot be AI-generated. Code from forums or tutorials must be fully understood before adding them to the repo.
+
+All information should come primarily from documentations and forums. If I get stuck on a specific problem for over three hours, I allow myself to ask a very targeted question to an LLM to get myself unstuck.
 
 # Features
 
