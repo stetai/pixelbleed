@@ -19,6 +19,9 @@ const elSaveSettings    = $("save-settings");
 
 const elSaveAsJson      = $("saving-json");
 
+const elTester          = $("tester");
+const elTesterResult    = $("tester-result");
+
 const STYLESHEET = document.styleSheets[0];
 
 // --- Initialize ---------------------------------------------
@@ -30,6 +33,8 @@ async function init() {
     elSaveSettings.addEventListener('click', renderPainter);
 
     elSaveAsJson.addEventListener('click', saveJson);
+
+    elTester.addEventListener('click', runTest);
 
     // Initialize interactive elements here
     renderPainter();
@@ -44,6 +49,30 @@ function initPixels() {
         for (let col=0; col<width; col++) {
             const px = new Pixel([row, col]);
             PIXELS[row].push(px);
+
+
+            // Set corner neighbours
+            if (row !== 0) {
+                const pxTop = PIXELS[row-1][col];
+                // Set top neighbours of current pixel
+                px.getCorner(2).setNeighbours(pxTop, null);
+                px.getCorner(1).setNeighbours(null, pxTop);
+
+                // Set bottom neighbours of top pixel
+                pxTop.getCorner(0).setNeighbours(px, null);
+                pxTop.getCorner(3).setNeighbours(null, px);
+            }
+
+            if (col !== 0) {
+                const pxLeft = PIXELS[row][col-1];
+                // Set left neighbours of current pixel
+                px.getCorner(2).setNeighbours(null, pxLeft);
+                px.getCorner(3).setNeighbours(pxLeft, null);
+
+                // Set right neighbours of left pixel
+                pxLeft.getCorner(1).setNeighbours(px, null);
+                pxLeft.getCorner(0).setNeighbours(null, px);
+            }
         }
     }
 }
@@ -81,7 +110,6 @@ function renderPainter() {
             const elPixel = document.createElement("div");
             elPixel.classList.add('pixel-full');
             elPixel.id = `px-${row}-${col}`;
-            //elPixel.innerHTML = `${row},${col}`; // debug
             
             const elPxSE = document.createElement("div");
             const elPxNE = document.createElement("div");
@@ -94,10 +122,6 @@ function renderPainter() {
             elPxNW.classList.add('pixel-corner', 'pixel-corner-NW');
             elPxSW.classList.add('pixel-corner', 'pixel-corner-SW');
             elPxCenter.classList.add('pixel-center');
-
-            //elPxNE.innerHTML = `${col}, ${row}`;
-            //elPxNW.innerHTML = `${col}, ${row}`;
-            //elPxSW.innerHTML = `${col}, ${row}`;
 
             elPixel.appendChild(elPxSE);
             elPixel.appendChild(elPxNE);
@@ -157,6 +181,9 @@ function refreshPixel(pixel) {
 
 function loadDocumentJson(path) {
     
+    // checks
+    assertSizeMatch(null, null);
+    // set pixel's neighbours
 }
 
 function assertSizeMatch(size, image) {
@@ -212,29 +239,44 @@ function handleToggle(e, row, col) {
 
     const px = PIXELS[row][col];
     
-    if (e.shiftKey) { // Toggle corners
+    const cornerCSSClass = e.currentTarget.classList[1];
+    let orientation = null;
+    switch(cornerCSSClass) {
+        case ('pixel-corner-SE'):
+            orientation = 0;
+            break;
+        case ('pixel-corner-NE'):
+            orientation = 1;
+            break;
+        case ('pixel-corner-NW'):
+            orientation = 2;
+            break;
+        case ('pixel-corner-SW'):
+            orientation = 3;
+            break;
+    }
 
-        const cornerCSSClass = e.currentTarget.classList[1];
-        let orientation = null;
-        switch(cornerCSSClass) {
-            case ('pixel-corner-SE'):
-                orientation = 0;
-                break;
-            case ('pixel-corner-NE'):
-                orientation = 1;
-                break;
-            case ('pixel-corner-NW'):
-                orientation = 2;
-                break;
-            case ('pixel-corner-SW'):
-                orientation = 3;
-                break;
-        }
-
+    if (e.shiftKey) { // Toggle corner mode
+        console.log(px.getCorner(orientation).getNeighboursStates()); //debug
+        px.getCorner(orientation).toggleState();
+    } else if (e.ctrlKey) { // Toggle individual corners
         px.getCorner(orientation).toggleState();
     } else { // Toggle center
         px.toggleState();
     }
 
     refreshPixel(px);
+}
+
+function runTest() {
+    const px = PIXELS[2][2];
+    /*px.getCorner(0).setNeighbours(PIXELS[2][1], PIXELS[1][2]);
+    px.getCorner(0).setNeighbours(PIXELS[2][2], null);*/
+    const neighbours = px.getCorner(0).getNeighboursStates();
+
+    const result = neighbours ?? "nothing.";
+
+    // Display result
+    elTesterResult.textContent = result;
+
 }

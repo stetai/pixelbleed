@@ -114,4 +114,6 @@ input[type=number]{
     z-index: 2;
     background: red;
     pointer-events: none;
+    /*border: 0.1px solid;
+    border-color: rgba(127, 127, 127, 0.5);*/
 }

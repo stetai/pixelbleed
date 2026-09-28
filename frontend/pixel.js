@@ -61,6 +61,8 @@ class Corner {
         this.orientation = orientation;
 
         this.state = false;
+
+        this.neighbours = [null, null];
     }
 
     getPixel() {return this.pixel;}
@@ -75,7 +77,21 @@ class Corner {
 
     _setState(state) {this.state = state;}
 
-    getNeighbors() {}
+    getNeighbours() {return this.neighbours;}
+
+    setNeighbours(neighbourR, neighbourL) {
+        const nR = neighbourR ?? this.getNeighbours()[0];
+        const nL = neighbourL ?? this.getNeighbours()[1];
+        this.neighbours = [nR, nL];
+    }
+
+    getNeighboursStates() {
+        const stateR = this.getNeighbours()[0]?.getState();
+        const stateM = this.getNeighbours()[0]?.getCorner((this.getOrientation() + 1) % 4).getNeighbours()[0]?.getState();
+        const stateL = this.getNeighbours()[1]?.getState();
+
+        return [stateR, stateM, stateL];
+    }
 
     toggleState() {this._setState(!this.getState());}
 }
