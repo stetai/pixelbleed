@@ -31,9 +31,30 @@ def svg_path():
 							paths.add('bS') // Back Straight
 						else if "front right corner is coloured":
 							paths.add('rA') // Right Angular
+						else if "front right pixel is coloured":
+							paths.add('rR') // Right Rounded
+                        else:
+                            paths.add('rS') // Forwards Straight
 					
-					if "is angular corner from the left":
-						
+					if "is angular corner from the left" or "is straight corner line" or "is angular corner from the right":
+                        if "front right pixel is coloured":
+                            paths.add('rR') // Right Rounded
+                        else if "front left pixel is coloured":
+                            paths.add('fS') // Straight
+                        else:
+                            paths.add('lR') // Left Rounded
+
+                    if "is round corner from the right":
+                        if "front left pixel is coloured":
+                            paths.add('fS')
+                        else if "front left corner is coloured":
+                            paths.add('lR') // Left Rounded
+                        else if "back left corner is coloured":
+                            paths.add('lA')
+                        else if "back right corner is coloured"
+                            paths.add('bS') // Back Straight
+                        else:
+                            paths.add('rA')
 					
 			end do while
 		end for
@@ -42,4 +63,5 @@ end def
 	
 def find_start_point():
 	return a random point on a boundary where it goes from center boundary to corner boundary with coloured pixel on the left and the uncoloured cell on the right
+
 */
